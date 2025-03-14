@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生日倒计时</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        #date-time {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 20px;
+        }
+        #countdown {
+            font-size: 40px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="date-time"></div>
+    <div id="countdown"></div>
+
+    <script>
+        function updateDateTime() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = (now.getMonth() + 1).toString().padStart(2, '0');
+            const day = now.getDate().toString().padStart(2, '0');
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+            document.getElementById('date-time').innerText = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+        }
+
+        function updateCountdown() {
+            const now = new Date();
+            const targetDate = new Date(now.getFullYear(), 3, 2); // 4月2日，注意月份是从0开始的
+            if (now > targetDate) {
+                targetDate.setFullYear(targetDate.getFullYear() + 1);
+            }
+            const diff = targetDate - now;
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            document.getElementById('countdown').innerText = `距离4月2日我过生日还有 ${days} 天 祝我生日快乐`;
+        }
+
+        setInterval(updateDateTime, 1000);
+        setInterval(updateCountdown, 1000);
+        updateDateTime();
+        updateCountdown();
+    </script>
+</body>
+</html>
