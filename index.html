@@ -26,13 +26,28 @@
             font-size: 40px;
             text-align: center;
         }
+        #visitor-count {
+            margin-top: 20px;
+            font-size: 20px;
+        }
+        a {
+            color: lightblue;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
     <div id="date-time"></div>
     <div id="countdown"></div>
+    <div id="visitor-count"></div>
+    <a href="visitors.html">查看多少人见证了我的生日日期</a>
 
     <script>
+        // 更新时间
         function updateDateTime() {
             const now = new Date();
             const year = now.getFullYear();
@@ -44,6 +59,7 @@
             document.getElementById('date-time').innerText = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
         }
 
+        // 更新倒计时
         function updateCountdown() {
             const now = new Date();
             const targetDate = new Date(now.getFullYear(), 3, 2); // 4月2日，注意月份是从0开始的
@@ -52,13 +68,26 @@
             }
             const diff = targetDate - now;
             const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            document.getElementById('countdown').innerText = `距离4月2日我过生日还有 ${days} 天 祝我生日快乐`;
+            document.getElementById('countdown').innerText = `距离陈飞鸣生日 4月2日还有 ${days} 天！`;
         }
 
+        // 记录访问次数
+        function updateVisitorCount() {
+            let count = localStorage.getItem('visitorCount');
+            if (!count) {
+                count = 0;
+            }
+            count = parseInt(count) + 1;
+            localStorage.setItem('visitorCount', count);
+            document.getElementById('visitor-count').innerText = `你是第 ${count} 位访问者`;
+        }
+
+        // 初始化
         setInterval(updateDateTime, 1000);
         setInterval(updateCountdown, 1000);
         updateDateTime();
         updateCountdown();
+        updateVisitorCount();
     </script>
 </body>
 </html>
