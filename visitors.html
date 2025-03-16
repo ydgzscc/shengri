@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>访问记录</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        h1 {
+            font-size: 40px;
+        }
+        p {
+            font-size: 30px;
+        }
+        a {
+            color: lightblue;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>访问记录</h1>
+    <p id="total-visitors"></p>
+    <a href="index.html">返回主页</a>
+
+    <script>
+        // 获取访问次数
+        const count = localStorage.getItem('visitorCount') || 0;
+        document.getElementById('total-visitors').innerText = `总访问人数：${count}`;
+    </script>
+</body>
+</html>
